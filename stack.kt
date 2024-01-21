@@ -5,29 +5,24 @@ class Stack {
     var stacked = arrayOfNulls<String>(stackSize)
     var top = 0
 
-    fun isFull(): Boolean {
-        return top == stackSize
-    }
-
-    fun push(data: String) {
+    fun isFull() = top == stackSize
+    fun isEmpty()=top == 0
+    fun push(data: String) =
         if (!isFull()) {
             stacked[top] = data
             top++
+            true
         } else {
             println("범위를 넘었잖아")
+            false
         }
-    }
-    fun popping(){
-        if (!isFull()) {
-            var data = stacked[top-1]
-            stacked[top-1] = null
-            println(data)
-        } else {
-            println("범위를 넘었잖아")
+
+    fun popping() = if( isEmpty())  null else {
+            top--
+            stacked[top]
         }
-    }
     override fun toString(): String {
-        return stacked.contentToString()
+        return stacked.slice(0 until top).reversed().joinToString(",")
     }
 }
 
